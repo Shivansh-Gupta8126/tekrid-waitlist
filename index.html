@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Tekrid — Join the Waitlist</title>
+<meta content="Tekrid connects riders directly with verified drivers nearby. No dispatch, no commission, no markup. Join the waitlist." name="description"/>
+
+
+
+<style>
+:root {
+  color-scheme: light;
+  --color-background: #ffffff;
+  --color-surface: #f5f5f5;
+  --color-text-primary: #111111;
+  --color-text-secondary: #616161;
+  --color-border: #d5d5d5;
+  --color-interactive: #111111;
+  --color-interactive-text: #ffffff;
+  --color-disabled: #999999;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-background: #111111;
+    --color-surface: #1b1b1b;
+    --color-text-primary: #f5f5f5;
+    --color-text-secondary: #aaaaaa;
+    --color-border: #414141;
+    --color-interactive: #f5f5f5;
+    --color-interactive-text: #111111;
+    --color-disabled: #666666;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-background: #111111;
+  --color-surface: #1b1b1b;
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #aaaaaa;
+  --color-border: #414141;
+  --color-interactive: #f5f5f5;
+  --color-interactive-text: #111111;
+  --color-disabled: #666666;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 24px; }
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: 'Clash Display', Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: inherit; text-underline-offset: 4px; }
+button, input, select, textarea { font: inherit; }
+button, a, input, textarea, select, summary { -webkit-tap-highlight-color: transparent; }
+button, .btn { cursor: pointer; }
+button:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--color-text-primary); outline-offset: 5px;
+}
+.wrap, .topbar, footer { width: min(100% - 96px, 1248px); margin: 0 auto; }
+.topbar {
+  min-height: 100px; display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; border-bottom: 1px solid var(--color-text-primary);
+}
+.mark {
+  color: var(--color-text-primary); font-size: 25px; font-weight: 800;
+  letter-spacing: -.3px; text-decoration: none; display: flex; align-items: center; gap: 14px;
+}
+.mark-sub {
+  font-size: 12px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;
+  padding-left: 14px; border-left: 1px solid var(--color-border); color: var(--color-text-secondary);
+}
+.header-actions { display: flex; gap: 32px; align-items: center; }
+.header-actions a { font-size: 13px; text-decoration: none; }
+.header-actions a:hover { text-decoration: underline; }
+.theme-toggle {
+  padding: 8px 13px; min-height: 40px; min-width: 66px; font-size: 12px;
+  border: 1px solid var(--color-border); color: var(--color-text-primary); background: transparent;
+}
+.theme-toggle:hover { border-color: var(--color-text-primary); }
+main { padding-bottom: 76px; }
+.eyebrow, .section-title, .panel-kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+}
+.eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 28px; }
+.eyebrow::before { content: ''; width: 6px; height: 6px; background: currentColor; }
+h1 { margin: 0; letter-spacing: -.025em; line-height: 1.04; font-weight: 700; }
+.field { margin: 0 0 19px; min-width: 0; }
+.field label { display: block; margin: 0 0 7px; font-size: 12px; font-weight: 600; }
+.field .hint { font-size: 11px; font-weight: 400; color: var(--color-text-secondary); margin-left: 5px; }
+.input, select.input, textarea.input {
+  width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid var(--color-border);
+  border-radius: 0; background: var(--color-background); color: var(--color-text-primary);
+  font-size: 16px; appearance: none; -webkit-appearance: none;
+}
+.input:focus { outline: 2px solid var(--color-text-primary); outline-offset: -2px; }
+.input::placeholder { color: var(--color-text-secondary); font-size: 13px; }
+textarea.input { min-height: 76px; resize: vertical; line-height: 1.5; display: block; }
+select.input {
+  padding-right: 32px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--color-text-secondary) 50%), linear-gradient(135deg, var(--color-text-secondary) 50%, transparent 50%);
+  background-position: calc(100% - 17px) 20px, calc(100% - 12px) 20px;
+  background-size: 5px 5px; background-repeat: no-repeat;
+}
+.btn-primary, .btn-secondary {
+  font-size: 13px; font-weight: 600; min-height: 48px; padding: 13px 19px; border-radius: 0;
+}
+.btn-primary { width: 100%; border: 1px solid var(--color-interactive); background: var(--color-interactive); color: var(--color-interactive-text); }
+.btn-primary:hover:not(:disabled) { opacity: .8; }
+.btn-primary:disabled { background: var(--color-disabled); border-color: var(--color-disabled); cursor: default; }
+.btn-secondary { background: transparent; color: var(--color-text-primary); border: 1px solid var(--color-border); }
+.btn-secondary:hover:not(:disabled) { border-color: var(--color-text-primary); background: var(--color-surface); }
+.btn-secondary:disabled { opacity: .5; cursor: default; }
+.btn-small { min-height: 40px; padding: 9px 14px; font-size: 12px; }
+.form-error, .error-box {
+  display: none; padding: 13px 15px; border: 1px solid var(--color-text-primary);
+  background: var(--color-surface); font-size: 13px; margin: 0 0 22px; overflow-wrap: anywhere;
+}
+.form-error.active, .error-box.active { display: block; }
+footer {
+  padding: 22px 0 calc(22px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--color-text-primary); color: var(--color-text-secondary);
+  font-size: 11px; display: flex; justify-content: space-between; gap: 20px;
+}
+.footer-wordmark { font-weight: 700; color: var(--color-text-primary); letter-spacing: -.025em; }
+@media (max-width: 800px) {
+  .wrap, .topbar, footer { width: calc(100% - 48px); }
+  .topbar { min-height: 80px; }
+  .header-actions { gap: 20px; }
+  main { padding-bottom: 48px; }
+}
+@media (max-width: 480px) {
+  .wrap, .topbar, footer { width: calc(100% - 36px); }
+  .topbar { min-height: 72px; }
+  .mark { font-size: 22px; }
+  .header-actions a { display: none; }
+  footer { flex-wrap: wrap; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+.view { display: none; }
+.view.active { display: block; }
+body:has(#view-confirm.active) .header-actions a { display: none; }
+.opening-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 92px); padding: 62px 0 56px; align-items: start; }
+.intro h1 { font-size: clamp(48px, 5.3vw, 76px); max-width: 12ch; margin-bottom: 28px; }
+.subhead { font-size: 16px; line-height: 1.7; color: var(--color-text-secondary); max-width: 48ch; margin: 0; }
+.fact-strip { margin-top: 38px; padding: 20px 0; display: grid; grid-template-columns: .8fr 1.5fr .7fr; gap: 15px; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+.fact-value { font-size: 20px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; }
+.fact-label { font-size: 10px; color: var(--color-text-secondary); margin-top: 4px; }
+.steps-block { margin-top: 40px; }
+.section-title { color: var(--color-text-secondary); margin: 0 0 22px; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.step { display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: baseline; }
+.step-index { font-size: 11px; font-variant-numeric: tabular-nums; color: var(--color-text-secondary); }
+.step-body h3, .feature-item h3 { font-size: 14px; margin: 0 0 5px; font-weight: 600; }
+.step-body p, .feature-item p { font-size: 13px; line-height: 1.65; color: var(--color-text-secondary); margin: 0; }
+.signup-panel { border: 1px solid var(--color-text-primary); padding: 30px; }
+.panel-heading { padding-bottom: 23px; margin-bottom: 25px; border-bottom: 1px solid var(--color-border); }
+.panel-heading .panel-kicker { margin: 0 0 9px; color: var(--color-text-secondary); }
+.panel-heading h2 { margin: 0; font-size: 27px; line-height: 1.15; letter-spacing: -.015em; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.radio-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.radio-pill { position: relative; margin: 0 !important; }
+.radio-pill input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.radio-pill span { display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid var(--color-border); min-height: 44px; font-size: 12px; font-weight: 500; }
+.radio-pill input:checked + span { background: var(--color-interactive); color: var(--color-interactive-text); border-color: var(--color-interactive); }
+.radio-pill input:focus-visible + span { outline: 2px solid var(--color-text-primary); outline-offset: 3px; }
+.honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-footnote { font-size: 11px; color: var(--color-text-secondary); margin: 15px 0 0; line-height: 1.6; text-align: center; }
+.information-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--color-text-primary); padding-top: 42px; gap: clamp(40px, 6vw, 92px); }
+.feature-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 30px 24px; }
+.feature-item { display: block; }
+.feature-bullet { display: block; width: 16px; height: 2px; background: var(--color-text-primary); margin-bottom: 13px; }
+.faq-item { padding: 18px 0; border-bottom: 1px solid var(--color-border); }
+.faq-item:first-child { padding-top: 0; }
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; font-size: 14px; font-weight: 600; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-size: 21px; font-weight: 400; line-height: 1; flex-shrink: 0; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-item p { margin: 12px 26px 0 0; font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); }
+.confirm-card { margin: 75px auto 0; max-width: 670px; padding: 42px 36px; border: 1px solid var(--color-text-primary); text-align: center; }
+.confirm-eyebrow { margin: 0 0 28px; text-transform: uppercase; font-size: 11px; letter-spacing: .12em; }
+.confirm-card .position-number { font-size: clamp(76px, 12vw, 132px); color: var(--color-text-primary); line-height: 1; font-weight: 700; letter-spacing: -.025em; font-variant-numeric: tabular-nums; margin: 0 0 28px; }
+.confirm-card h2 { font-size: 22px; letter-spacing: -.01em; line-height: 1.3; margin: 0 0 14px; }
+.confirm-card p:not(.position-number):not(.confirm-eyebrow) { font-size: 13px; line-height: 1.65; color: var(--color-text-secondary); max-width: 44ch; margin: 0 auto 24px; }
+.confirm-actions { margin: 0 auto; max-width: 320px; }
+.confirm-actions button { width: 100%; }
+.confirm-card p.confirm-note { margin: 22px auto 0 !important; font-size: 11px !important; }
+@media (min-width: 801px) and (max-width: 1050px) {
+  .opening-grid { gap: 32px; grid-template-columns: 1fr 1fr; }
+  .signup-panel { padding: 24px; }
+  .fact-strip { grid-template-columns: 1fr 1fr; }
+  .fact-strip > div:last-child { grid-column: 1 / -1; }
+  .feature-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 800px) {
+  .opening-grid { grid-template-columns: 1fr; gap: 36px; padding: 38px 0 40px; }
+  .intro { display: contents; }
+  .hero-copy { order: 0; }
+  .signup-panel { order: 1; }
+  .steps-block { order: 2; margin-top: 0 !important; }
+  .intro h1 { font-size: clamp(46px, 8.5vw, 68px); max-width: 15ch; }
+  .subhead { max-width: 58ch; }
+  .steps-block { margin-top: 30px; }
+  .steps { gap: 19px; }
+  .information-grid { grid-template-columns: 1fr; gap: 38px; padding-top: 32px; }
+  .signup-panel { padding: 28px; }
+  .confirm-card { margin-top: 38px; }
+}
+@media (max-width: 480px) {
+  .opening-grid { padding-top: 30px; }
+  .eyebrow { margin-bottom: 22px; }
+  .intro h1 { font-size: clamp(40px, 11.5vw, 54px); margin-bottom: 22px; }
+  .subhead { font-size: 14px; }
+  .fact-strip { gap: 8px; margin-top: 28px; }
+  .fact-value { font-size: 17px; }
+  .fact-label { font-size: 9px; }
+  .signup-panel { padding: 22px 18px; }
+  .panel-heading h2 { font-size: 25px; }
+  .feature-list { grid-template-columns: 1fr; gap: 24px; }
+  .confirm-card { padding: 32px 20px; }
+}
+@media (max-width: 360px) {
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .fact-value { font-size: 15px; }
+}
+</style>
+<link href="https://api.fontshare.com" rel="preconnect"/><link crossorigin="" href="https://cdn.fontshare.com" rel="preconnect"/><link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&amp;display=swap" rel="stylesheet"/></head>
+<body>
+<header class="topbar">
+<a aria-label="Tekrid home" class="mark" href="#" id="homeLink">
+    TEKRID
+  </a>
+
+<div class="header-actions"><a href="#how-it-works">How it works</a><a href="#questions">Questions</a><button class="theme-toggle" id="themeToggle" type="button">Dark</button></div></header>
+<main id="app">
+<!-- ===================== WAITLIST VIEW ===================== -->
+<section class="view active" id="view-waitlist">
+<div class="wrap"><div class="opening-grid"><div class="intro"><div class="hero-copy"><p class="eyebrow">Launching on Android</p><h1>Find a nearby driver. Skip the markup.</h1><p class="subhead">
+        Tekrid connects you directly with verified drivers within 5 km — see a reference
+        fare, call the driver yourself, and pay them directly. No dispatch, no commission,
+        no middleman.
+      </p><div class="fact-strip">
+<div>
+<div class="fact-value">5 km</div>
+<div class="fact-label">Search radius</div>
+</div>
+<div>
+<div class="fact-value">₹10 + ₹10/km</div>
+<div class="fact-label">Reference fare</div>
+</div>
+<div>
+<div class="fact-value">0%</div>
+<div class="fact-label">Commission on fares</div>
+</div>
+</div></div><section aria-labelledby="stepsTitle" class="steps-block" id="how-it-works"><h2 class="section-title" id="stepsTitle">How it works</h2><ul class="steps">
+<li class="step">
+<span class="step-index">01</span>
+<div class="step-body">
+<h3>Enter where you're going</h3>
+<p>Set a starting point and a destination — live location or typed in manually.</p>
+</div>
+</li>
+<li class="step">
+<span class="step-index">02</span>
+<div class="step-body">
+<h3>See nearby verified drivers</h3>
+<p>Tekrid shows eligible drivers within 5 km and a reference fare of ₹10 + ₹10/km.</p>
+</div>
+</li>
+<li class="step">
+<span class="step-index">03</span>
+<div class="step-body">
+<h3>Call them directly and go</h3>
+<p>Negotiate and pay the driver yourself. Tekrid never touches the fare.</p>
+</div>
+</li>
+</ul></section></div><section aria-labelledby="signupTitle" class="signup-panel"><div class="panel-heading"><p class="panel-kicker">Tekrid waitlist</p><h2 id="signupTitle">Join the waitlist.</h2></div><div class="form-error" id="formError" role="alert"></div><form id="waitlistForm" novalidate="">
+<div class="field">
+<label for="name">Name</label>
+<input autocomplete="name" class="input" id="name" name="name" required="" type="text"/>
+</div>
+<div class="field">
+<label for="email">Email</label>
+<input autocomplete="email" class="input" id="email" name="email" required="" type="email"/>
+</div>
+<div class="form-row"><div class="field">
+<label for="phone">Phone <span class="hint">optional</span></label>
+<input autocomplete="tel" class="input" id="phone" name="phone" type="tel"/>
+</div><div class="field">
+<label for="city">City</label>
+<input autocomplete="address-level2" class="input" id="city" name="city" required="" type="text"/>
+</div></div>
+
+<div class="field">
+<label>I'd mainly use Tekrid as a</label>
+<div aria-label="Interested as" class="radio-group" role="radiogroup">
+<label class="radio-pill">
+<input checked="" name="interestedAs" type="radio" value="Rider"/>
+<span>Rider</span>
+</label>
+<label class="radio-pill">
+<input name="interestedAs" type="radio" value="Driver"/>
+<span>Driver</span>
+</label>
+<label class="radio-pill">
+<input name="interestedAs" type="radio" value="Both"/>
+<span>Both</span>
+</label>
+</div>
+</div>
+<div class="field">
+<label for="referral">How did you hear about us? <span class="hint">optional</span></label>
+<select class="input" id="referral" name="referral">
+<option value="">Select one</option>
+<option value="Friend or family">Friend or family</option>
+<option value="Social media">Social media</option>
+<option value="Search engine">Search engine</option>
+<option value="News or blog">News or blog</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div class="field">
+<label for="comments">Anything else? <span class="hint">optional</span></label>
+<textarea class="input" id="comments" name="comments" placeholder="Questions, routes you'd use it for, etc."></textarea>
+</div>
+<!-- Honeypot field — left blank by humans, filled in by bots -->
+<div aria-hidden="true" class="honeypot">
+<label for="website">Website</label>
+<input autocomplete="off" id="website" name="website" tabindex="-1" type="text"/>
+</div>
+<button class="btn-primary" id="submitBtn" type="submit">Join the waitlist</button>
+<p class="form-footnote">No spam. One email when Tekrid is ready for your area.</p>
+</form></section></div><div class="information-grid"><section aria-labelledby="whyTitle"><h2 class="section-title" id="whyTitle">Why Tekrid</h2><ul class="feature-list">
+<li class="feature-item">
+<span aria-hidden="true" class="feature-bullet"></span>
+<div>
+<h3>No commission, ever</h3>
+<p>Tekrid doesn't take a cut of the fare. You pay the driver directly, the same way you'd pay a friend for a lift.</p>
+</div>
+</li>
+<li class="feature-item">
+<span aria-hidden="true" class="feature-bullet"></span>
+<div>
+<h3>Verified drivers only</h3>
+<p>Every driver's documents are reviewed before they can show up in anyone's search results.</p>
+</div>
+</li>
+<li class="feature-item">
+<span aria-hidden="true" class="feature-bullet"></span>
+<div>
+<h3>Real proximity, not a radius trick</h3>
+<p>Only drivers genuinely within 5 km appear — no inflated search area to pad the results.</p>
+</div>
+</li>
+<li class="feature-item">
+<span aria-hidden="true" class="feature-bullet"></span>
+<div>
+<h3>One account, two roles</h3>
+<p>Sign in once with Google and switch between finding a ride and driving one — no separate driver app.</p>
+</div>
+</li>
+</ul></section><section aria-labelledby="questionsTitle" id="questions"><h2 class="section-title" id="questionsTitle">Questions</h2><div class="faq-list">
+<details class="faq-item">
+<summary>Is Tekrid a taxi company?</summary>
+<p>No. Tekrid is a matching app, not a dispatcher or a cab fleet. It helps you find a nearby driver who's already available — you handle the ride and payment directly with them.</p>
+</details>
+<details class="faq-item">
+<summary>Who sets the fare?</summary>
+<p>Tekrid shows a reference fare (₹10 plus ₹10 per km) as a starting point so neither side is guessing. You and the driver agree on the final price together.</p>
+</details>
+<details class="faq-item">
+<summary>How are drivers verified?</summary>
+<p>Drivers submit their documents when they sign up, and each one is manually reviewed before that driver can appear in anyone's search.</p>
+</details>
+<details class="faq-item">
+<summary>Does joining the waitlist cost anything?</summary>
+<p>No. Joining the waitlist is free, and so is using Tekrid once it launches — there's no subscription or booking fee.</p>
+</details>
+<details class="faq-item">
+<summary>When does Tekrid launch?</summary>
+<p>We're building the Android app now. Everyone on the waitlist gets an email the moment Tekrid is ready in their city.</p>
+</details>
+</div></section></div></div>
+</section>
+<!-- ===================== CONFIRMATION VIEW ===================== -->
+<section class="view" id="view-confirm">
+<div class="wrap">
+<div class="confirm-card">
+<p class="confirm-eyebrow" id="confirmEyebrow">You're on the list</p>
+<p class="position-number" id="confirmPosition">—</p>
+<h2 id="confirmHeadline">That's your position on the Tekrid waitlist.</h2>
+<p id="confirmBody">We'll email you the moment Tekrid opens up in your area.</p>
+<div class="confirm-actions">
+<button class="btn-secondary" id="copyLinkBtn" type="button">Copy waitlist link to share</button>
+</div>
+<p class="confirm-note">Know someone who'd use Tekrid? Sharing this link moves more people in before launch.</p>
+</div>
+</div>
+</section>
+</main>
+<footer><span class="footer-wordmark">TEKRID</span><span>Tekrid Waitlist</span></footer>
+<script>
+(function () {
+  'use strict';
+
+  // ======================================================================
+  // Paste your Apps Script Web App /exec URL here after you deploy Code.gs
+  // ======================================================================
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrSPTh_v0kgKu6qzAxDC_kqEXG2N-qH1xDAfQHhmaFizJlNKXmV1R6E25lPlq4b1FG/exec';
+
+  const state = { confirmed: false };
+
+  // ---------------------------------------------------------------------
+  // Theme
+  // ---------------------------------------------------------------------
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+
+  function systemPrefersDark() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function applyTheme(theme) {
+    if (theme) root.setAttribute('data-theme', theme);
+    else root.removeAttribute('data-theme');
+    const effectiveDark = theme ? theme === 'dark' : systemPrefersDark();
+    themeToggle.textContent = effectiveDark ? 'Light' : 'Dark';
+  }
+  applyTheme(localStorage.getItem('tekrid_theme'));
+  themeToggle.addEventListener('click', function () {
+    const current = root.getAttribute('data-theme') || (systemPrefersDark() ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('tekrid_theme', next);
+    applyTheme(next);
+  });
+
+  // ---------------------------------------------------------------------
+  // View routing (two views only: form, then confirmation)
+  // ---------------------------------------------------------------------
+  const views = {
+    waitlist: document.getElementById('view-waitlist'),
+    confirm: document.getElementById('view-confirm')
+  };
+
+  function showView(name) {
+    Object.keys(views).forEach(key => views[key].classList.toggle('active', key === name));
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  document.getElementById('homeLink').addEventListener('click', function (e) {
+    e.preventDefault();
+    state.confirmed = false;
+    showView('waitlist');
+  });
+
+  // ---------------------------------------------------------------------
+  // API helper
+  // ---------------------------------------------------------------------
+  function configured() {
+    return APPS_SCRIPT_URL && APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === -1;
+  }
+
+  function apiPost(payload) {
+    return fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids a CORS preflight
+      body: JSON.stringify(payload)
+    }).then(r => r.json());
+  }
+
+  // ---------------------------------------------------------------------
+  // Waitlist form
+  // ---------------------------------------------------------------------
+  const form = document.getElementById('waitlistForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formError = document.getElementById('formError');
+
+  function setFormError(msg) {
+    if (!msg) { formError.classList.remove('active'); formError.textContent = ''; return; }
+    formError.textContent = msg;
+    formError.classList.add('active');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    setFormError('');
+
+    const data = new FormData(form);
+    const payload = {
+      action: 'join',
+      name: (data.get('name') || '').toString().trim(),
+      email: (data.get('email') || '').toString().trim(),
+      phone: (data.get('phone') || '').toString().trim(),
+      city: (data.get('city') || '').toString().trim(),
+      interestedAs: (data.get('interestedAs') || 'Rider').toString(),
+      referral: (data.get('referral') || '').toString(),
+      comments: (data.get('comments') || '').toString().trim(),
+      website: (data.get('website') || '').toString() // honeypot
+    };
+
+    if (!payload.name) return setFormError('Please enter your name.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) return setFormError('Please enter a valid email.');
+    if (!payload.city) return setFormError('Please enter your city.');
+
+    if (!configured()) {
+      setFormError('This page is not connected to a backend yet. Set APPS_SCRIPT_URL in the script.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Joining…';
+
+    apiPost(payload)
+      .then(function (res) {
+        if (!res || !res.success) {
+          throw new Error((res && res.error) || 'Something went wrong. Please try again.');
+        }
+        state.confirmed = true;
+        renderConfirmation(res);
+        showView('confirm');
+      })
+      .catch(function (err) {
+        setFormError(err.message || 'Something went wrong. Please try again.');
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Join the waitlist';
+      });
+  });
+
+  function renderConfirmation(res) {
+    document.getElementById('confirmPosition').textContent = '#' + res.position;
+    document.getElementById('confirmEyebrow').textContent = res.alreadyJoined ? 'Welcome back' : "You're on the list";
+    document.getElementById('confirmHeadline').textContent = res.alreadyJoined
+      ? "That's still your position on the Tekrid waitlist."
+      : "That's your position on the Tekrid waitlist.";
+    document.getElementById('confirmBody').textContent = res.alreadyJoined
+      ? 'This email was already signed up — we\'ll email you the moment Tekrid opens in your area.'
+      : 'We\'ll email you the moment Tekrid opens up in your area.';
+  }
+
+  document.getElementById('copyLinkBtn').addEventListener('click', function () {
+    const url = window.location.href.split('#')[0];
+    const btn = this;
+    navigator.clipboard.writeText(url).then(function () {
+      const original = btn.textContent;
+      btn.textContent = 'Link copied';
+      setTimeout(function () { btn.textContent = original; }, 1800);
+    }).catch(function () {
+      window.prompt('Copy this link:', url);
+    });
+  });
+
+  showView('waitlist');
+})();
+</script>
+</body>
+</html>
